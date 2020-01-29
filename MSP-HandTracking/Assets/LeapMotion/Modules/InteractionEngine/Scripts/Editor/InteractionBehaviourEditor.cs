@@ -23,7 +23,7 @@ namespace Leap.Unity.Interaction {
       base.OnEnable();
 
       // Interaction Manager hookup.
-      specifyCustomDecorator("_manager", drawInteractionManagerDecorator);
+      specifyCustomDecorator("_manager", DrawInteractionManagerDecorator);
 
       deferProperty("_eventTable");
       specifyCustomDrawer("_eventTable", drawEventTable);
@@ -45,7 +45,8 @@ namespace Leap.Unity.Interaction {
       specifyCustomDecorator("_noContactLayer", drawNoContactLayerDecorator);
     }
 
-    private void drawInteractionManagerDecorator(SerializedProperty property) {
+        [System.Obsolete]
+        private void DrawInteractionManagerDecorator(SerializedProperty property) {
       bool shouldDrawInteractionManagerNotSetWarning = false;
       foreach (var target in targets) {
         if (PrefabUtility.GetPrefabType(target) == PrefabType.Prefab) continue;
@@ -69,11 +70,12 @@ namespace Leap.Unity.Interaction {
         noManagerSetWarningMessage += " Object validation requires a configured manager "
                                     + "property.";
 
-        drawSetManagerWarningBox(noManagerSetWarningMessage, MessageType.Error);
+                drawSetManagerWarningBox(noManagerSetWarningMessage, MessageType.Error);
       }
     }
 
-    private void drawSetManagerWarningBox(string warningMessage, MessageType messageType) {
+        [System.Obsolete]
+        private void drawSetManagerWarningBox(string warningMessage, MessageType messageType) {
       EditorGUILayout.BeginHorizontal();
 
       EditorGUILayout.HelpBox(warningMessage, messageType);
@@ -99,7 +101,7 @@ namespace Leap.Unity.Interaction {
 
             Undo.RecordObject(target, "Auto-set Interaction Manager");
             target.manager = manager;
-          }
+                    }
         }
       }
       EditorGUI.EndDisabledGroup();
